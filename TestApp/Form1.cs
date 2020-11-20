@@ -77,7 +77,7 @@ namespace TestApp
         {
             var path = Path.GetDirectoryName(selectedFile);
             var timestamp = DateTime.Now.ToString("MM-dd-yyyy_hh-mm-ss_tt");
-            var filePath = path + $"MatchingDevices_{timestamp}.xml";
+            var filePath = path + $@"\MatchingDevices_{timestamp}.xml";
             var serializer = new XmlSerializer(typeof(DeviceList));
             using (var writer = new StreamWriter(filePath))
             {
