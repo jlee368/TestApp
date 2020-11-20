@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Devices>
+	<Device>
+		<HostName>Workstation_1</HostName>
+		<IP>10.0.0.2</IP>
+		<ScannedOn>10/21/2020</ScannedOn>
+		<Softwares>
+			<Software>
+				<Name>Internet Explorer</Name>
+				<Version>1.2.3</Version>
+				<InstalledOn>09/12/2019</InstalledOn>
+				<UpdatedOn>10/05/2020</UpdatedOn>
+			</Software>
+		</Softwares>
+	</Device>
+	<Device>
+		<HostName>Workstation_2</HostName>
+		<IP>10.0.0.3</IP>
+		<ScannedOn>08/11/2020</ScannedOn>
+		<Softwares>
+			<Software>
+				<Name>Internet Explorer</Name>
+				<Version>1.2.3</Version>
+				<InstalledOn>09/12/2019</InstalledOn>
+				<UpdatedOn>02/05/2020</UpdatedOn>
+			</Software>
+			<Software>
+				<Name>Norton Internet Security</Name>
+				<Version>2.3.4</Version>
+				<InstalledOn>09/12/2019</InstalledOn>
+				<UpdatedOn>05/05/2020</UpdatedOn>
+			</Software>
+		</Softwares>
+	</Device>
+	<Device>
+		<HostName>Workstation_3</HostName>
+		<IP>10.0.0.4</IP>
+		<ScannedOn>04/09/2019</ScannedOn>
+		<Softwares>
+			<Software>
+				<Name>Internet Explorer</Name>
+				<Version>1.2.3</Version>
+				<InstalledOn>02/24/2019</InstalledOn>
+				<UpdatedOn>01/05/2020</UpdatedOn>
+			</Software>
+			<Software>
+				<Name>Norton Internet Security</Name>
+				<Version>2.3.4</Version>
+				<InstalledOn>02/24/2019</InstalledOn>
+				<UpdatedOn>05/05/2020</UpdatedOn>
+			</Software>
+		</Softwares>
+	</Device>
+</Devices>

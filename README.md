@@ -5,6 +5,8 @@ Then assign that list back into a new device list object. The file parsing and c
 the scannedOnBefore dates. You are free to implement the creation of the list any way you choose. One hint is to use the methods in System.Linq to convert the array of devices to a list and then use
 one of those methods to "FindAll" the matching devices. Another hint is to use a method in System.Array to "FindAll" the matching devices.
 
+Included is a Devices.xml file. Use that file to feed into the application. Feel free to edit the xml file to suit your needs.
+
 The logic for the program is housed in the code behind of the view. To access the code behind you will need to right click Form1.cs in the "Solution Explorer" view of Visual Studio. A context menu will appear.
 Click "View Code" on the menu. You can also click to select the Form1.cs file in the "Solution Explorer" and press F7 to access the code behind of the view.
 
