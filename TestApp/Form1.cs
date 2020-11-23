@@ -53,6 +53,7 @@ namespace TestApp
              * */
             //This is returning all the devices and not filtering them against the scannedOnAfter and the scannedOnBefore dates.
             //You need to filter deviceList.Devices
+            var matchingDevices = Array.FindAll(deviceList.Devices, x => x.ScannedOn >= scannedAfter && x.ScannedOn <= scannedBefore);
             var matchingDevices = deviceList.Devices;
             var matchingDeviceFile = new DeviceList() { Devices = matchingDevices };
             serialize(matchingDeviceFile);
