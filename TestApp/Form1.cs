@@ -41,6 +41,10 @@ namespace TestApp
                 deviceList = parseFile();
                 findDevicesBetweenScannedOnDates();
             }
+            else
+            {
+                MessageBox.Show("Please select a file");
+            }
         }
 
         private void findDevicesBetweenScannedOnDates()
@@ -53,9 +57,16 @@ namespace TestApp
              * */
             //This is returning all the devices and not filtering them against the scannedOnAfter and the scannedOnBefore dates.
             //You need to filter deviceList.Devices
-            var matchingDevices = Array.FindAll(deviceList.Devices, x => x.ScannedOn >= scannedAfter && x.ScannedOn <= scannedBefore);
-            var matchingDeviceFile = new DeviceList() { Devices = matchingDevices };
-            serialize(matchingDeviceFile);
+            if (deviceList.Devices == null)
+            {
+                MessageBox.Show("No Device Detected in the File");
+            }
+            else
+            {
+                var matchingDevices = Array.FindAll(deviceList.Devices, x => x.ScannedOn >= scannedAfter && x.ScannedOn <= scannedBefore);
+                var matchingDeviceFile = new DeviceList() { Devices = matchingDevices };
+                serialize(matchingDeviceFile);
+            }            
         }
 
         private DeviceList parseFile()
@@ -76,7 +87,8 @@ namespace TestApp
         private void serialize(DeviceList deviceFile)
         {
             var path = Path.GetDirectoryName(selectedFile);
-            var timestamp = DateTime.Now.ToString("MM-dd-yyyy_hh-mm-ss_tt");
+            //Time Range
+            var timestamp = scannedAfter.ToString("MM-dd-yyyy") + " Through " + scannedBefore.ToString("MM-dd-yyyy");
             var filePath = path + $@"\MatchingDevices_{timestamp}.xml";
             var serializer = new XmlSerializer(typeof(DeviceList));
             using (var writer = new StreamWriter(filePath))
@@ -89,11 +101,21 @@ namespace TestApp
         private void dtPickerScannedAfter_ValueChanged(object sender, EventArgs e)
         {
             scannedAfter = dtPickerScannedAfter.Value;
+            if (scannedAfter > scannedBefore)
+            {
+                scannedBefore = scannedAfter;
+                dtPickerScannedBefore.Value = scannedAfter;
+            }
         }
 
         private void dtPickerScannedBefore_ValueChanged(object sender, EventArgs e)
         {
             scannedBefore = dtPickerScannedBefore.Value;
+            if (scannedAfter > scannedBefore)
+            {
+                scannedAfter = scannedBefore;
+                dtPickerScannedAfter.Value = scannedBefore;
+            }
         }
     }
 }
