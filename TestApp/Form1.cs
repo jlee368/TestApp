@@ -30,7 +30,14 @@ namespace TestApp
             if (filePrompt.ShowDialog() == DialogResult.OK)
             {
                 selectedFile = filePrompt.FileName;
-                tboxDeviceFile.Text = selectedFile;
+                if (selectedFile.Substring(selectedFile.Length - 4, 4) != ".xml")
+                {
+                    MessageBox.Show("Please select a XML file");
+                }
+                else
+                {
+                    tboxDeviceFile.Text = selectedFile;
+                }
             }
         }
 
