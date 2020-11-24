@@ -10,10 +10,9 @@ namespace TestApp
     {
         private string selectedFile = "";
         private DeviceList deviceList = null;
-        private static int daysBeforeToday = 90;
-        private static int daysAfterToday = 90;
-        private DateTime scannedAfter = DateTime.Now.Subtract(TimeSpan.FromDays(daysBeforeToday));
-        private DateTime scannedBefore = DateTime.Now.AddDays(daysAfterToday);
+        private static int daysFromToday = 90;
+        private DateTime scannedAfter = DateTime.Now.Subtract(TimeSpan.FromDays(daysFromToday));
+        private DateTime scannedBefore = DateTime.Now.AddDays(daysFromToday);
 
         public Form1()
         {
@@ -24,20 +23,20 @@ namespace TestApp
 
         private void btnAddFile_Click(object sender, EventArgs e)
         {
-            var filePrompt = new OpenFileDialog();
-            filePrompt.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
-            filePrompt.Multiselect = false;
+            var filePrompt = new OpenFileDialog
+            {
+                Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*",
+                Multiselect = false
+            };
             if (filePrompt.ShowDialog() == DialogResult.OK)
             {
                 selectedFile = filePrompt.FileName;
+
+                //Case handling:non xml
                 if (selectedFile.Substring(selectedFile.Length - 4, 4) != ".xml")
-                {
                     MessageBox.Show("Please select a XML file");
-                }
-                else
-                {
+                else 
                     tboxDeviceFile.Text = selectedFile;
-                }
             }
         }
 
@@ -91,12 +90,13 @@ namespace TestApp
             }
         }
 
-        private void serialize(DeviceList deviceFile)
+             private void serialize(DeviceList deviceFile)
         {
             var path = Path.GetDirectoryName(selectedFile);
             //Time Range
             var timestamp = scannedAfter.ToString("MM-dd-yyyy") + " Through " + scannedBefore.ToString("MM-dd-yyyy");
             var filePath = path + $@"\MatchingDevices_{timestamp}.xml";
+
             var serializer = new XmlSerializer(typeof(DeviceList));
             using (var writer = new StreamWriter(filePath))
             {
@@ -108,21 +108,17 @@ namespace TestApp
         private void dtPickerScannedAfter_ValueChanged(object sender, EventArgs e)
         {
             scannedAfter = dtPickerScannedAfter.Value;
+            //Case Handling 
             if (scannedAfter > scannedBefore)
-            {
-                scannedBefore = scannedAfter;
-                dtPickerScannedBefore.Value = scannedAfter;
-            }
+                scannedBefore = dtPickerScannedBefore.Value = scannedAfter;
         }
 
         private void dtPickerScannedBefore_ValueChanged(object sender, EventArgs e)
         {
             scannedBefore = dtPickerScannedBefore.Value;
-            if (scannedAfter > scannedBefore)
-            {
-                scannedAfter = scannedBefore;
-                dtPickerScannedAfter.Value = scannedBefore;
-            }
+            //Case handling
+            if (scannedAfter > scannedBefore)            
+                scannedAfter =  dtPickerScannedAfter.Value = scannedBefore;
         }
     }
 }
